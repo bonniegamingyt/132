@@ -3,60 +3,34 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Tiny Garden Ultimate — Garden + Freeroam (Styled)</title>
+<title>Tiny Garden Ultimate — Gardening 2.0 + Freeroam</title>
 <style>
-  /* -------------------------
-     Theme & Base
-     ------------------------- */
   :root{
-    --accent:#27ae60;
-    --accent-2:#1e8449;
-    --muted:#6b7280;
-    --card:#ffffffee;
-    --bg-day1:#e9fff0;
-    --bg-day2:#c9f6d7;
-    --radius:14px;
-    --tile-size:64px;
-    font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    --accent:#27ae60; --accent-2:#1e8449; --muted:#6b7280;
+    --bg-day1:#e9fff0; --bg-day2:#c9f6d7; --card:#ffffffee;
+    --radius:12px; --tile-size:64px;
+    font-family:Inter, system-ui, -apple-system,"Segoe UI",Roboto,Arial;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{height:100%}
-  body{
-    min-height:100vh;display:flex;justify-content:center;align-items:center;
-    background: linear-gradient(180deg,var(--bg-day1),var(--bg-day2));
-    transition: background 1s ease; padding:18px;
-    -webkit-font-smoothing:antialiased;
-  }
-
-  /* -------------------------
-     App layout
-     ------------------------- */
-  .app{
-    width:1200px; max-width:98vw; display:grid; grid-template-columns:360px 1fr;
-    gap:16px; background:var(--card); border-radius:16px; box-shadow:0 18px 60px rgba(10,40,20,0.14);
-    overflow:hidden; min-height:760px;
-  }
-
-  /* Sidebar */
-  .sidebar{padding:18px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,rgba(255,255,255,0.95),rgba(245,255,245,0.98))}
-  .brand{display:flex;align-items:center;gap:10px;font-weight:900;color:var(--accent-2);font-size:20px}
+  body{min-height:100vh;display:flex;justify-content:center;align-items:center;
+    background:linear-gradient(180deg,var(--bg-day1),var(--bg-day2));padding:18px}
+  .app{width:1200px;max-width:98vw;display:grid;grid-template-columns:360px 1fr;gap:16px;background:var(--card);border-radius:14px;box-shadow:0 18px 60px rgba(8,30,12,0.12);overflow:hidden;min-height:780px}
+  .sidebar{padding:16px;display:flex;flex-direction:column;gap:12px;background:linear-gradient(180deg,#fff,#f7fff7)}
+  .brand{font-weight:900;color:var(--accent-2);display:flex;align-items:center;gap:10px}
   .hud{display:flex;gap:8px;flex-wrap:wrap}
   .badge{background:#f5fff6;padding:8px 10px;border-radius:10px;font-weight:800;color:var(--accent-2)}
-  .muted{color:var(--muted);font-size:14px}
-  .section{background:#f6fff7;border-radius:12px;padding:8px;box-shadow:inset 0 2px 8px rgba(0,0,0,0.02)}
+  .section{background:#f6fff7;border-radius:10px;padding:8px}
   .listItem{padding:8px;margin-top:8px;background:#eaf9ec;border-radius:10px;display:flex;align-items:center;justify-content:space-between}
-  .controls{display:flex;gap:8px;flex-wrap:wrap}
-  button{padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:white;cursor:pointer;box-shadow:0 8px 22px rgba(39,122,61,0.12)}
-  button.ghost{background:transparent;color:var(--accent-2);border:1px solid rgba(39,122,61,0.12)}
-  button.small{padding:6px 8px;font-size:13px;border-radius:8px}
+  button{padding:8px 12px;border-radius:10px;border:none;background:linear-gradient(180deg,var(--accent),var(--accent-2));color:white;cursor:pointer}
+  button.small{padding:6px 8px;font-size:13px}
+  .muted{color:var(--muted);font-size:13px}
 
-  /* right panel (game area) */
   .panel{padding:16px;display:flex;flex-direction:column;gap:12px}
-  .sky{height:120px;border-radius:12px;position:relative;overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,0.0),rgba(255,255,255,0.0))}
-  .sun{position:absolute;right:18px;top:18px;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff9c8,#ffd86b);box-shadow:0 10px 30px rgba(255,170,40,0.12)}
+  .sky{height:110px;border-radius:10px;position:relative;overflow:hidden;background:linear-gradient(180deg,transparent,transparent)}
+  .sun{position:absolute;right:18px;top:18px;width:64px;height:64px;border-radius:50%;background:radial-gradient(circle at 30% 30%,#fff9c8,#ffd76b)}
   .inner{display:flex;gap:12px;align-items:stretch}
 
-  /* game area split */
   .gameArea{flex:1;display:flex;flex-direction:column;gap:12px}
   .controlsBar{display:flex;justify-content:space-between;align-items:center}
   .gridWrap{background:linear-gradient(180deg,#eaf8ec,#d8f4d8);padding:12px;border-radius:12px;flex:1;display:flex;flex-direction:column}
@@ -64,81 +38,65 @@
 
   /* garden grid */
   .gardenGrid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;padding:8px;align-items:end}
-  .plot{
-    height:110px;border-radius:12px;background:linear-gradient(180deg,#f9fff9,#e9f8e9);position:relative;cursor:pointer;box-shadow:inset 0 4px 10px rgba(0,0,0,0.03),0 6px 18px rgba(0,0,0,0.05);transition:transform .12s;
-    display:flex;align-items:flex-end;justify-content:center;overflow:visible;
-  }
+  .plot{height:120px;border-radius:12px;background:linear-gradient(180deg,#f9fff9,#e9f8e9);position:relative;cursor:pointer;box-shadow:inset 0 4px 10px rgba(0,0,0,0.03),0 6px 18px rgba(0,0,0,0.05);transition:transform .12s;display:flex;align-items:flex-end;justify-content:center;overflow:visible}
   .plot:hover{transform:translateY(-6px)}
-  .soil{position:absolute;left:0;right:0;bottom:0;height:38px;border-bottom-left-radius:12px;border-bottom-right-radius:12px;background:linear-gradient(180deg,#8a5a36,#5b3216);box-shadow:inset 0 4px 8px rgba(0,0,0,0.2)}
-  .plant{position:absolute;bottom:52px;font-size:28px;opacity:0;transform:translateY(8%) scale(.95);transition:all .35s}
+  .soil{position:absolute;left:6px;right:6px;bottom:4px;height:36px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;background:linear-gradient(180deg,#8a5a36,#5b3216);box-shadow:inset 0 4px 8px rgba(0,0,0,0.18)}
+  .soil.poor{background:linear-gradient(180deg,#6b4b30,#4a2a12)}
+  .soil.rich{background:linear-gradient(180deg,#996133,#6b3f1d)}
+  .plant{position:absolute;bottom:66px;font-size:28px;opacity:0;transform:translateY(8%) scale(.95);transition:all .35s}
   .plant.show{opacity:1;transform:translateY(0) scale(1)}
-  .plant.small{font-size:20px}
-  .plant.medium{font-size:28px}
-  .plant.large{font-size:36px}
-  .progress{position:absolute;bottom:8px;height:8px;width:76%;background:rgba(0,0,0,0.06);border-radius:6px}
+  .waterBadge{position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.9);padding:4px 6px;border-radius:8px;font-weight:700;font-size:12px}
+  .weed{position:absolute;top:8px;left:8px;font-size:16px}
+  .pest{position:absolute;top:8px;left:8px;font-size:18px}
+  .progress{position:absolute;bottom:10px;height:8px;width:76%;background:rgba(0,0,0,0.06);border-radius:6px}
   .progressFill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:6px;transition:width .18s}
-  .pest{position:absolute;top:8px;left:8px;font-size:20px;cursor:pointer}
 
-  /* inventory & log */
+  /* per-plot control overlay */
+  .plotControls{position:absolute;left:8px;bottom:46px;display:flex;gap:6px;z-index:5}
+  .plotControls button{padding:6px;border-radius:8px;font-size:12px}
+
   .inventory{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
   .invItem{background:#fff;padding:6px 8px;border-radius:8px;border:1px solid rgba(0,0,0,0.04);font-weight:700}
 
-  /* freeroam container */
+  /* freeroam map */
   .freeroamWrap{display:none;flex-direction:column;gap:8px}
   .mapWrap{background:linear-gradient(180deg,#eef8ef,#ddf2df);border-radius:12px;padding:12px;display:flex;gap:12px}
-  .map{
-    width:calc(var(--tile-size) * 14); /* columns */
-    height:calc(var(--tile-size) * 9); /* rows */
-    background:linear-gradient(180deg,#d8f4d8,#c8eac8);
-    border-radius:10px;
-    display:grid;
-    grid-template-columns:repeat(14, var(--tile-size));
-    grid-template-rows:repeat(9, var(--tile-size));
-    gap:2px;
-    position:relative;
-    box-shadow:inset 0 2px 6px rgba(0,0,0,0.06);
-    user-select:none;
-  }
-
-  /* tiles use inline SVG backgrounds (data URIs) */
-  .tile{width:var(--tile-size);height:var(--tile-size);display:block;background-size:cover;background-position:center;border-radius:8px;transition:transform .12s}
-  .tile:hover{transform:translateY(-6px)}
-  .tile.grass{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill="%23bdebb7" width="64" height="64"/><g opacity="0.12"><rect width="64" height="64" fill="%23000000"/></g></svg>')}
-  .tile.path{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill="%23e6d7b8" width="64" height="64"/><g opacity="0.08"><rect width="64" height="64" fill="%23000000"/></g></svg>')}
-  .tile.water{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill="%239fd3ff" width="64" height="64"/><g opacity="0.04"><rect width="64" height="64" fill="%23000000"/></g></svg>')}
-  .tile.shop{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill="%23fff1c8" width="64" height="64"/><g opacity="0.05"><rect width="64" height="64" fill="%23000000"/></g></svg>')}
-
-  .player{
-    position:absolute;width:46px;height:46px;border-radius:10px;background:linear-gradient(180deg,#fff,#f8d6b1);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 8px 18px rgba(0,0,0,0.12);transform:translate(-50%,-50%);transition:left .12s, top .12s;
-  }
-  .npc{
-    position:absolute;width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,#fff,#ffdce0);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 6px 14px rgba(0,0,0,0.12);transform:translate(-50%,-50%);cursor:pointer;transition:left .12s, top .12s}
-  .dialogBox{position:fixed;left:50%;top:60%;transform:translate(-50%,-50%);background:white;padding:12px;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,0.18);z-index:9999;max-width:520px}
+  .map{width:calc(var(--tile-size)*14);height:calc(var(--tile-size)*9);background:linear-gradient(180deg,#d8f4d8,#c8eac8);border-radius:10px;display:grid;grid-template-columns:repeat(14,var(--tile-size));grid-template-rows:repeat(9,var(--tile-size));gap:2px;position:relative;user-select:none}
+  .tile{width:var(--tile-size);height:var(--tile-size);border-radius:8px;background-size:cover;background-position:center}
+  .tile.grass{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill="%23bdebb7" width="64" height="64"/></svg>')}
+  .tile.path{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill="%23e6d7b8" width="64" height="64"/></svg>')}
+  .tile.shop{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64"><rect fill="%23fff1c8" width="64" height="64"/></svg>')}
+  .player{position:absolute;width:46px;height:46px;border-radius:10px;background:linear-gradient(180deg,#fff,#f8d6b1);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 8px 18px rgba(0,0,0,0.12);transform:translate(-50%,-50%);transition:left .12s,top .12s}
+  .npc{position:absolute;width:44px;height:44px;border-radius:10px;background:linear-gradient(180deg,#fff,#ffdce0);display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 6px 14px rgba(0,0,0,0.12);transform:translate(-50%,-50%);cursor:pointer;transition:left .12s,top .12s}
+  .tile.hiddenItem{box-shadow:0 0 18px rgba(255,215,0,0.9) inset}
+  .dialogBox{position:fixed;left:50%;top:64%;transform:translate(-50%,-50%);background:white;padding:12px;border-radius:10px;box-shadow:0 12px 40px rgba(0,0,0,0.18);z-index:9999;max-width:520px}
   .hidden{display:none}
 
-  /* small screens */
+  /* small screen */
   @media(max-width:1000px){
     .app{grid-template-columns:1fr}
-    .panel{padding:12px}
-    .map{width:calc(var(--tile-size) * 9);grid-template-columns:repeat(9,var(--tile-size));grid-template-rows:repeat(6,var(--tile-size));height:calc(var(--tile-size) * 6)}
+    .map{width:calc(var(--tile-size)*9);grid-template-columns:repeat(9,var(--tile-size));grid-template-rows:repeat(6,var(--tile-size));height:calc(var(--tile-size)*6)}
+    .gardenGrid{grid-template-columns:repeat(4,1fr)}
   }
 </style>
 </head>
 <body>
   <div class="app" id="app">
     <div class="sidebar">
-      <div class="brand">🌼 Tiny Garden Ultimate</div>
+      <div class="brand">🌼 Tiny Garden Ultimate — Gardening 2.0</div>
 
       <div class="hud">
         <div class="badge">Money: $<span id="money">50</span></div>
         <div class="badge">Seeds: <span id="seeds">5</span></div>
         <div class="badge">Pots: <span id="pots">6</span></div>
+        <div class="badge">Water Charges: <span id="waterCharges">0</span></div>
+        <div class="badge">Fertilizers: <span id="fertCount">0</span></div>
       </div>
 
       <div class="section">
         <div style="display:flex;justify-content:space-between;align-items:center">
           <div style="font-weight:800">Mode</div>
-          <div class="controls">
+          <div style="display:flex;gap:8px">
             <button id="btnGarden" class="small">🌱 Garden</button>
             <button id="btnFreeroam" class="small ghost">🌍 Freeroam</button>
           </div>
@@ -151,13 +109,13 @@
       </div>
 
       <div class="section">
-        <div style="font-weight:700">NPC Quests</div>
-        <div id="npcQuests" style="margin-top:8px"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:700">Shop</div><small class="muted">buy tools & supplies</small></div>
+        <div id="shopList" style="margin-top:8px"></div>
       </div>
 
       <div class="section">
-        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:700">Shop</div><small class="muted">buy items</small></div>
-        <div id="shopList" style="margin-top:8px"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center"><div style="font-weight:700">Quests</div><small class="muted">Town & NPC</small></div>
+        <div id="npcQuests" style="margin-top:8px"></div>
       </div>
 
       <div style="display:flex;gap:8px">
@@ -168,12 +126,12 @@
       <div class="section">
         <div style="font-weight:700">Inventory</div>
         <div class="inventory" id="inventory"></div>
-        <div style="margin-top:8px" class="muted">Harvests go to inventory — give to NPCs in town to complete quests.</div>
+        <div style="margin-top:8px" class="muted">Harvested crops and items are stored here.</div>
       </div>
 
       <div class="section">
         <div style="font-weight:700">Log</div>
-        <div id="log" style="margin-top:8px;max-height:200px;overflow:auto" class="muted"></div>
+        <div id="log" style="margin-top:8px;max-height:220px;overflow:auto" class="muted"></div>
       </div>
     </div>
 
@@ -182,27 +140,46 @@
 
       <div class="inner">
         <div class="gameArea" id="gameArea">
-          <!-- Garden area -->
+          <!-- Garden -->
           <div id="gardenArea">
             <div class="controlsBar">
               <div class="toolbar">
                 <button id="btnHarvestAll" class="small ghost">Harvest All</button>
                 <button id="btnOpenTown" class="small">Go to Town</button>
+                <button id="btnBuyWater" class="small">Buy Water Can (+3) $8</button>
               </div>
-              <div class="toolbar muted">Click plots to plant/grow — harvest goes to inventory</div>
+              <div class="toolbar muted">Click plots to plant/grow. Use water & fertilizer to speed growth.</div>
             </div>
+
             <div class="gridWrap" id="gardenWrap">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <div style="font-weight:800">Garden</div>
+                <div id="seasonBadge" class="muted"></div>
+              </div>
               <div class="gardenGrid" id="gardenGrid"></div>
+
+              <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+                <div>
+                  <small class="muted">Tools:</small>
+                  <button id="btnUseWater" class="small">💧 Water (use charge)</button>
+                  <button id="btnUseFert" class="small">🌿 Fertilize</button>
+                  <button id="btnScarecrow" class="small ghost">Place Scarecrow ($40)</button>
+                </div>
+                <div>
+                  <small class="muted">Soil Upgrades:</small>
+                  <button id="btnUpgradeSoil" class="small ghost">Upgrade a plot ($6)</button>
+                </div>
+              </div>
             </div>
           </div>
 
-          <!-- Freeroam area -->
+          <!-- Freeroam -->
           <div id="freeroamArea" class="freeroamWrap">
             <div style="display:flex;justify-content:space-between;align-items:center">
               <div style="font-weight:800">Freeroam Town</div>
-              <div style="display:flex;gap:8px">
+              <div style="display:flex;gap:8px;align-items:center">
                 <button id="btnReturnGarden" class="small ghost">Return to Garden</button>
-                <div class="muted">Move: WASD / Arrow keys or click map</div>
+                <div class="muted">Move: WASD / Arrow keys or click tiles</div>
               </div>
             </div>
 
@@ -215,168 +192,265 @@
     </div>
   </div>
 
-  <!-- Dialogue box -->
-  <div id="dialog" class="dialogBox hidden" role="dialog" aria-modal="true"></div>
-
-  <!-- toasts -->
+  <div id="dialog" class="dialogBox hidden"></div>
   <div id="toastWrap" class="toastWrap"></div>
 
 <script>
-/* ===============================
-   Tiny Garden + Freeroam (Styled)
-   Single-file. Save to local and open.
-   =============================== */
+/* ---------- Gardening 2.0 + Freeroam Single File ---------- */
 
 /* ---------- Data ---------- */
 const PLANTS = {
-  carrot:     { emoji:'🥕', growthStages:3, reward:2, seedCost:1 },
-  strawberry: { emoji:'🍓', growthStages:3, reward:5, seedCost:2 },
-  apple:      { emoji:'🍎', growthStages:6, reward:15, seedCost:6 }
+  carrot:     { emoji:'🥕', growthStages:3, reward:2, seedCost:1, seasons:['spring','summer','autumn'] },
+  strawberry: { emoji:'🍓', growthStages:3, reward:5, seedCost:2, seasons:['spring','summer'] },
+  apple:      { emoji:'🍎', growthStages:6, reward:15, seedCost:6, seasons:['summer','autumn'] },
+  corn:       { emoji:'🌽', growthStages:4, reward:6, seedCost:2, seasons:['summer'] },
+  grapes:     { emoji:'🍇', growthStages:5, reward:10, seedCost:3, seasons:['summer','autumn'] },
+  pumpkin:    { emoji:'🎃', growthStages:7, reward:22, seedCost:8, seasons:['autumn'] }
 };
 
 const SHOP = [
   { id:'seed', name:'Extra Seed', cost:5, action: s=> s.seeds++ },
   { id:'pot', name:'Extra Pot', cost:10, action: s=> { s.pots++; ensurePlots(); } },
-  { id:'fert', name:'Fertilizer', cost:6, action: s=> s.fertCount = (s.fertCount||0) + 1 }
+  { id:'waterCan', name:'Water Can (+3 charges)', cost:8, action: s=> { s.waterCharges = (s.waterCharges||0) + 3; } },
+  { id:'fertBag', name:'Fertilizer Bag (+1 use)', cost:6, action: s=> { s.fertCount = (s.fertCount||0) + 1; } },
+  { id:'betterCan', name:'Better Water Can (waters 3 plots)', cost:30, action: s=> s.betterCan = true },
+  { id:'scarecrow', name:'Scarecrow (prevents pests nearby)', cost:40, action: s=> s.hasScarecrow = true }
 ];
 
-const MAP_COLUMNS = 14;
-const MAP_ROWS = 9;
+const MAP_COLUMNS = 14, MAP_ROWS = 9;
 
-/* ---------- State & persistence ---------- */
-const STORAGE_KEY = 'tinyGarden_styled_v1';
+/* ---------- State ---------- */
+const STORAGE_KEY = 'tinyGarden_garden2_v1';
 const DEFAULT_STATE = {
-  money:50, seeds:5, pots:6, plots:[], inventory:{}, npcs:[], quests:[],
-  waterCans:0, fertCount:0,
-  freeroam:{ player:{col:3,row:3} , townQuests:[] },
-  device:'pc'
+  money:50, seeds:8, pots:6, plots:[], inventory:{}, quests:[], waterCharges:0, fertCount:0, betterCan:false, hasScarecrow:false,
+  freeroam:{ player:{col:3,row:3}, hiddenItems:[] }, device:'pc'
 };
-
 let state = loadState() || JSON.parse(JSON.stringify(DEFAULT_STATE));
 
-/* ---------- Helpers: save/load ---------- */
-function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); toast('Saved'); }catch(e){console.warn(e);} }
-function loadState(){ try{ const s = localStorage.getItem(STORAGE_KEY); return s ? JSON.parse(s) : null } catch(e){ return null } }
+/* ---------- Utilities ---------- */
+function loadState(){ try{ const s = localStorage.getItem(STORAGE_KEY); return s ? JSON.parse(s): null } catch(e){ return null } }
+function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); toast('Saved'); } catch(e){ console.warn(e); } }
+function toast(txt,ms=1400){ const tw=document.getElementById('toastWrap'); const t=document.createElement('div'); t.className='toast'; t.textContent=txt; tw.appendChild(t); requestAnimationFrame(()=>t.classList.add('show')); setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),300); }, ms); }
+function log(msg){ const el=document.getElementById('log'); const now=new Date(); const row=document.createElement('div'); row.textContent=`[${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}] ${msg}`; el.prepend(row); }
 
-function toast(text,ms=1400){
-  const tw = document.getElementById('toastWrap'); const t=document.createElement('div'); t.className='toast'; t.textContent = text; tw.appendChild(t);
-  requestAnimationFrame(()=>t.classList.add('show'));
-  setTimeout(()=>{ t.classList.remove('show'); setTimeout(()=>t.remove(),300); }, ms);
-}
-function log(msg){
-  const el = document.getElementById('log'); const time = new Date(); const row = document.createElement('div');
-  row.textContent = `[${time.getHours()}:${String(time.getMinutes()).padStart(2,'0')}] ${msg}`; el.prepend(row);
-}
-
-/* ---------- Garden: plots & UI ---------- */
+/* ---------- Garden core ---------- */
 const gardenGridEl = document.getElementById('gardenGrid');
-function makePlot(){ return { planted:false, plantKey:null, growth:0, pest:false } }
-function ensurePlots(){
-  while(state.plots.length < state.pots) state.plots.push(makePlot());
-  while(state.plots.length > state.pots) state.plots.pop();
-}
+function makePlot(){ return { planted:false, plantKey:null, growth:0, water:0, soilQuality:'normal', pest:false, weed:false } }
+function ensurePlots(){ while(state.plots.length < state.pots) state.plots.push(makePlot()); while(state.plots.length > state.pots) state.plots.pop(); }
 
 let selectedPlantKey = Object.keys(PLANTS)[0];
 
+/* seasons */
+function currentSeason(){
+  const m = new Date().getMonth()+1;
+  if(m>=3 && m<=5) return 'spring';
+  if(m>=6 && m<=8) return 'summer';
+  if(m>=9 && m<=11) return 'autumn';
+  return 'winter';
+}
+
+/* build plant selector */
 function buildPlantSelector(){
   const sel = document.getElementById('plantSelector'); sel.innerHTML='';
   for(const k in PLANTS){
     const p = PLANTS[k];
-    const item = document.createElement('div'); item.className='listItem';
-    item.innerHTML = `<div style="display:flex;gap:8px;align-items:center"><div style="font-size:18px">${p.emoji}</div><div style="text-transform:capitalize">${k}</div></div><div>${p.seedCost} seed</div>`;
-    item.addEventListener('click', ()=> {
-      selectedPlantKey = k;
-      Array.from(sel.children).forEach(c=>c.style.boxShadow='none');
-      item.style.boxShadow = 'inset 0 0 0 3px rgba(39,154,82,0.12)';
-      toast('Selected '+k,900);
-    });
-    sel.appendChild(item);
+    const div = document.createElement('div'); div.className='listItem';
+    const seasonOk = PLANTS[k].seasons.includes(currentSeason());
+    div.innerHTML = `<div style="display:flex;gap:8px;align-items:center"><div style="font-size:18px">${p.emoji}</div><div style="text-transform:capitalize">${k}${seasonOk? '':' (off-season)'}</div></div><div>${p.seedCost} seed</div>`;
+    div.addEventListener('click', ()=>{ selectedPlantKey = k; Array.from(sel.children).forEach(c=>c.style.boxShadow=''); div.style.boxShadow='inset 0 0 0 3px rgba(39,154,82,0.12)'; toast('Selected '+k); });
+    sel.appendChild(div);
   }
-  sel.firstChild && (sel.firstChild.style.boxShadow = 'inset 0 0 0 3px rgba(39,154,82,0.12)');
+  sel.firstChild && (sel.firstChild.style.boxShadow='inset 0 0 0 3px rgba(39,154,82,0.12)');
 }
 
+/* render garden */
 function renderGarden(){
   ensurePlots();
+  const season = currentSeason();
+  document.getElementById('seasonBadge').textContent = 'Season: '+season.toUpperCase();
   gardenGridEl.innerHTML='';
-  state.plots.forEach((plot, i) => {
-    const div = document.createElement('div'); div.className='plot';
-    div.addEventListener('click', ()=> onPlotClick(i));
-    // soil
-    const soil = document.createElement('div'); soil.className='soil'; div.appendChild(soil);
+  state.plots.forEach((plot,i)=>{
+    const div = document.createElement('div'); div.className='plot'; div.addEventListener('click', ()=> onPlotClick(i));
+    // soil visual
+    const soil = document.createElement('div'); soil.className='soil';
+    if(plot.soilQuality === 'poor') soil.classList.add('poor');
+    if(plot.soilQuality === 'rich') soil.classList.add('rich');
+    div.appendChild(soil);
+    // weed
+    if(plot.weed){ const w=document.createElement('div'); w.className='weed'; w.textContent='🌿'; div.appendChild(w); }
     // pest
-    if(plot.pest){
-      const pest = document.createElement('div'); pest.className='pest'; pest.textContent='🐛'; pest.title='Click to remove';
-      pest.addEventListener('click', (ev)=>{ ev.stopPropagation(); removePest(i); });
-      div.appendChild(pest);
-    }
+    if(plot.pest){ const p=document.createElement('div'); p.className='pest'; p.textContent='🐛'; p.title='Click to remove'; p.addEventListener('click', e=>{ e.stopPropagation(); removePest(i); }); div.appendChild(p); }
+    // planted
     if(plot.planted){
-      const p = document.createElement('div'); p.className='plant';
+      const pEl = document.createElement('div'); pEl.className='plant';
       const frac = plot.growth / PLANTS[plot.plantKey].growthStages;
-      if(frac < 0.4) p.classList.add('small'); else if(frac < 0.9) p.classList.add('medium'); else p.classList.add('large');
-      p.textContent = PLANTS[plot.plantKey].emoji; div.appendChild(p);
-      setTimeout(()=>p.classList.add('show'), 10);
-      const pr = document.createElement('div'); pr.className='progress';
-      const pf = document.createElement('div'); pf.className='progressFill';
-      pf.style.width = Math.min(100, Math.round((plot.growth/PLANTS[plot.plantKey].growthStages)*100)) + '%'; pr.appendChild(pf); div.appendChild(pr);
+      if(frac < 0.4) pEl.classList.add('small'); else if(frac < 0.9) pEl.classList.add('medium'); else pEl.classList.add('large');
+      pEl.textContent = PLANTS[plot.plantKey].emoji; div.appendChild(pEl); setTimeout(()=>pEl.classList.add('show'), 10);
+      const prog = document.createElement('div'); prog.className='progress'; const pf=document.createElement('div'); pf.className='progressFill';
+      const pct = Math.min(100, Math.round((plot.growth / PLANTS[plot.plantKey].growthStages)*100));
+      pf.style.width = pct + '%'; prog.appendChild(pf); div.appendChild(prog);
     }
+    // water badge
+    const waterBadge = document.createElement('div'); waterBadge.className='waterBadge'; waterBadge.textContent = '💧'+(plot.water||0);
+    div.appendChild(waterBadge);
+
+    // per-plot controls overlay (water / fertilize / remove weed)
+    const controls = document.createElement('div'); controls.className='plotControls';
+    const waterBtn = document.createElement('button'); waterBtn.textContent='💧'; waterBtn.title='Water plot';
+    waterBtn.addEventListener('click', (e)=>{ e.stopPropagation(); waterPlot(i); });
+    const fertBtn = document.createElement('button'); fertBtn.textContent='🌿'; fertBtn.title='Fertilize';
+    fertBtn.addEventListener('click', (e)=>{ e.stopPropagation(); fertilizePlot(i); });
+    const weedBtn = document.createElement('button'); weedBtn.textContent='✂️'; weedBtn.title='Remove weed';
+    weedBtn.addEventListener('click', (e)=>{ e.stopPropagation(); removeWeed(i); });
+    controls.appendChild(waterBtn); controls.appendChild(fertBtn); controls.appendChild(weedBtn);
+    div.appendChild(controls);
+
     gardenGridEl.appendChild(div);
   });
-  updateInventoryUI();
-  updateHUD();
+  updateInventoryUI(); updateHUD(); renderNpcQuests();
 }
 
-/* planting/growing/harvest */
+/* plot click: plant or grow */
 function onPlotClick(i){
   const plot = state.plots[i];
+  // if empty: plant
   if(!plot.planted){
     const seedCost = PLANTS[selectedPlantKey].seedCost;
     if(state.seeds >= seedCost){
+      // check season preference: allow planting but slower if off-season
       state.seeds -= seedCost;
-      plot.planted = true; plot.plantKey = selectedPlantKey; plot.growth = 0;
+      plot.planted = true; plot.plantKey = selectedPlantKey; plot.growth = 0; plot.water = 0;
       log('Planted '+selectedPlantKey);
       toast('Planted '+selectedPlantKey);
-      maybeSpawnPest(i);
+      maybeSpawnWeed(i); maybeSpawnPest(i);
       progressQuestProgress('plant', selectedPlantKey);
-      saveStateSoon();
-      renderGarden();
-    } else {
-      toast('Not enough seeds');
-    }
+      saveSoon(); renderGarden();
+    } else toast('Not enough seeds');
   } else {
+    // attempt to grow: if water >=1 or fertilizer used
+    if(plot.weed){ toast('Remove weeds first'); return; }
     if(plot.pest){ toast('Remove pest first'); return; }
-    plot.growth++;
-    log('Growth +1 on '+plot.plantKey);
-    if(plot.growth >= PLANTS[plot.plantKey].growthStages){
-      // harvest -> add to inventory
-      state.inventory[plot.plantKey] = (state.inventory[plot.plantKey]||0) + 1;
-      state.money += PLANTS[plot.plantKey].reward;
-      state.harvested = (state.harvested||0) + 1;
-      log('Harvested '+plot.plantKey+' (+1 to inventory), earned $'+PLANTS[plot.plantKey].reward);
-      toast('Harvested '+plot.plantKey);
-      progressQuestProgress('harvest', plot.plantKey);
-      // reset plot
-      plot.planted = false; plot.plantKey = null; plot.growth = 0; plot.pest = false;
-      saveStateSoon();
-      renderGarden();
+    // Season influence: if off-season growth requires +1 water to progress
+    const season = currentSeason();
+    const offSeason = !PLANTS[plot.plantKey].seasons.includes(season);
+    const soil = plot.soilQuality || 'normal';
+    const soilBonus = soil === 'rich' ? 0 : soil === 'poor' ? 1 : 0; // extra water needed for poor soil
+    const neededWater = 1 + (offSeason?1:0) + soilBonus;
+    if(plot.water >= neededWater){
+      plot.growth++;
+      plot.water = Math.max(0, plot.water - neededWater);
+      log('Growth +1 for '+plot.plantKey);
+      if(plot.growth >= PLANTS[plot.plantKey].growthStages){
+        // harvest: add to inventory, money adjusted for soil and pests
+        let base = PLANTS[plot.plantKey].reward;
+        if(plot.soilQuality === 'rich') base = Math.round(base * 1.2);
+        if(plot.soilQuality === 'poor') base = Math.max(1, Math.round(base * 0.8));
+        if(plot.pest) base = Math.max(0, Math.round(base * 0.6)); // pests reduce value
+        state.inventory[plot.plantKey] = (state.inventory[plot.plantKey]||0) + 1;
+        state.money += base;
+        state.harvested = (state.harvested||0) + 1;
+        log(`Harvested ${plot.plantKey} -> +1 inventory, +$${base}`);
+        toast(`Harvested ${plot.plantKey} +$${base}`);
+        progressQuestProgress('harvest', plot.plantKey);
+        // reset plot
+        plot.planted=false; plot.plantKey=null; plot.growth=0; plot.water=0; plot.pest=false; plot.weed=false;
+        saveSoon(); renderGarden(); return;
+      }
+      saveSoon(); renderGarden();
     } else {
-      renderGarden();
+      // not enough water: small chance to grow anyway but lower
+      if(Math.random() < 0.1){
+        plot.growth++;
+        toast('Lucky growth despite low water!');
+        if(plot.growth >= PLANTS[plot.plantKey].growthStages){
+          state.inventory[plot.plantKey] = (state.inventory[plot.plantKey]||0) + 1;
+          state.money += PLANTS[plot.plantKey].reward;
+          log('Harvested (lucky) '+plot.plantKey);
+          plot.planted=false; plot.plantKey=null; plot.growth=0; plot.water=0;
+          saveSoon(); renderGarden(); return;
+        }
+        saveSoon(); renderGarden();
+      } else {
+        toast('Needs water to grow (use plot water button)');
+      }
     }
   }
 }
 
-/* pests */
-function maybeSpawnPest(i){
-  setTimeout(()=>{
-    if(Math.random() < 0.24 && state.plots[i] && state.plots[i].planted && !state.plots[i].pest){
-      state.plots[i].pest = true; log('Pest appeared'); toast('Pest appeared!');
-      saveStateSoon(); renderGarden();
+/* water / fertilize / weed / pest functions */
+function waterPlot(i){
+  if(state.waterCharges && state.waterCharges>0){
+    // betterCan waters 3 plots including neighbors; otherwise single plot
+    const plot = state.plots[i];
+    state.waterCharges--;
+    let affected = 0;
+    if(state.betterCan){
+      // water i and up to two neighbors (left/right)
+      [i-1,i,i+1].forEach(idx => { if(state.plots[idx]){ state.plots[idx].water = (state.plots[idx].water||0) + 1; affected++; } });
+    } else {
+      plot.water = (plot.water||0) + 1; affected = 1;
     }
-  }, 1200 + Math.random()*2400);
+    log('Water used on plot(s) x'+affected);
+    toast(`Watered ${affected} plot(s)`);
+    progressQuestProgress('water', null);
+    saveSoon(); renderGarden();
+  } else {
+    toast('No water charges. Buy Water Can in shop or open a can.');
+  }
 }
+
+function fertilizePlot(i){
+  if(state.fertCount && state.fertCount>0){
+    const plot = state.plots[i];
+    state.fertCount--;
+    plot.growth = Math.min(PLANTS[plot.plantKey]?.growthStages || plot.growth + 1, PLANTS[plot.plantKey]?.growthStages || plot.growth + 1);
+    // fertilizer increases soil richness outcome
+    plot.soilQuality = (plot.soilQuality === 'rich') ? 'rich' : 'rich';
+    toast('Fertilized plot');
+    log('Fertilizer used');
+    saveSoon(); renderGarden();
+  } else {
+    toast('No fertilizer. Buy from shop.');
+  }
+}
+
+function removeWeed(i){
+  if(state.plots[i] && state.plots[i].weed){
+    state.plots[i].weed = false;
+    log('Weed removed');
+    toast('Weed removed');
+    saveSoon(); renderGarden();
+  } else toast('No weeds there');
+}
+
 function removePest(i){
-  if(!state.plots[i] || !state.plots[i].pest) return;
-  state.plots[i].pest = false; state.money += 1; log('Removed pest (+$1)'); toast('Pest removed +$1');
-  saveStateSoon(); renderGarden();
+  if(state.plots[i] && state.plots[i].pest){
+    state.plots[i].pest = false;
+    state.money += 1;
+    log('Pest removed +$1');
+    toast('Pest removed +$1');
+    saveSoon(); renderGarden();
+  } else toast('No pest here');
+}
+
+/* random weeds/pests spawning */
+function maybeSpawnWeed(i){
+  if(Math.random() < 0.12){ state.plots[i].weed = true; toast('Weeds appeared'); saveSoon(); renderGarden(); }
+}
+function maybeSpawnPest(i){
+  const sc = state.hasScarecrow ? 0.08 : 0.25;
+  setTimeout(()=>{
+    if(Math.random() < sc && state.plots[i] && state.plots[i].planted && !state.plots[i].pest){
+      state.plots[i].pest = true; toast('Pest appeared'); saveSoon(); renderGarden();
+    }
+  }, 1500 + Math.random()*3000);
+}
+
+/* Upgrade soil for a plot: pay $6, set to rich */
+function upgradeSoil(plotIndex){
+  if(state.money >= 6){
+    state.money -= 6; state.plots[plotIndex].soilQuality = 'rich'; toast('Soil upgraded'); log('Soil upgraded'); saveSoon(); renderGarden();
+  } else toast('Not enough money');
 }
 
 /* ---------- Inventory UI ---------- */
@@ -388,13 +462,9 @@ function updateInventoryUI(){
     box.textContent = `${PLANTS[k].emoji} ${k}: ${cnt}`;
     inv.appendChild(box);
   }
-}
-
-/* ---------- HUD ---------- */
-function updateHUD(){
-  document.getElementById('money').textContent = Math.floor(state.money || 0);
-  document.getElementById('seeds').textContent = state.seeds || 0;
-  document.getElementById('pots').textContent = state.pots || 0;
+  // also show generic items
+  const w = document.createElement('div'); w.className='invItem'; w.textContent = `WaterCharges: ${state.waterCharges||0}`; inv.appendChild(w);
+  const f = document.createElement('div'); f.className='invItem'; f.textContent = `Fert: ${state.fertCount||0}`; inv.appendChild(f);
 }
 
 /* ---------- Shop ---------- */
@@ -409,182 +479,14 @@ function renderShop(){
     btn.addEventListener('click', ()=>{
       const id = btn.dataset.id; const item = SHOP.find(x=>x.id===id);
       if(!item) return;
-      if(state.money >= item.cost){ state.money -= item.cost; item.action(state); toast('Bought '+item.name); log('Bought '+item.name); saveStateSoon(); renderGarden(); renderShop(); }
-      else toast('Not enough money');
+      if(state.money >= item.cost){ state.money -= item.cost; item.action(state); toast('Bought '+item.name); log('Bought '+item.name); saveSoon(); renderGarden(); renderShop(); updateInventoryUI(); } else toast('Not enough money');
     });
   });
 }
 
-/* ---------- Quests & NPCs (Garden-side preview) ---------- */
+/* ---------- Quests & NPCs (Garden) ---------- */
 function renderNpcQuests(){
-  const out = document.getElementById('npcQuests'); out.innerHTML='';
-  state.quests.forEach((q, i) => {
-    const row = document.createElement('div'); row.className='listItem';
-    row.innerHTML = `<div>${q.npc}: wants ${PLANTS[q.want].emoji} ${q.qty}</div><div>${q.completed ? 'Done' : (q.progress+'/'+q.qty)}</div>`;
-    out.appendChild(row);
-  });
-}
-
-/* ---------- Save scheduling ---------- */
-let saveTimer = null;
-function saveStateSoon(){ if(saveTimer) return; saveTimer = setTimeout(()=>{ saveState(); saveTimer=null; }, 900); }
-function saveState(){ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); toast('Saved'); } catch(e){ console.warn(e); } }
-
-/* ---------- Freeroam: map, player, NPCs ---------- */
-const mapEl = document.getElementById('map');
-let freeroamActive = false;
-
-// simple map tile layout (grass/path/shop/water features)
-function buildMapTiles(){
-  mapEl.innerHTML = '';
-  // create 14x9 tiles
-  for(let r=0;r<MAP_ROWS;r++){
-    for(let c=0;c<MAP_COLUMNS;c++){
-      const t = document.createElement('div'); t.className='tile grass';
-      // a simple path horizontally in mid area
-      if(r===4 && c>=2 && c<=11) t.className='tile path';
-      // a shop at upper-right
-      if(r===2 && c===11) t.className='tile shop';
-      // a water tile near bottom
-      if(r===7 && c===2) t.className='tile water';
-      t.dataset.col=c; t.dataset.row=r;
-      t.addEventListener('click', ()=> movePlayerTo(c, r));
-      mapEl.appendChild(t);
-    }
-  }
-}
-
-/* player representation */
-let playerEl = null;
-function placePlayer(){
-  if(!playerEl){
-    playerEl = document.createElement('div'); playerEl.className='player'; playerEl.textContent='🚶';
-    mapEl.appendChild(playerEl);
-  }
-  const p = state.freeroam.player;
-  const pos = tileToPixel(p.col, p.row);
-  playerEl.style.left = pos.x + 'px';
-  playerEl.style.top = pos.y + 'px';
-}
-
-/* NPC creation & placement (styled) */
-let townNPCs = [];
-function populateTownNPCs(){
-  // create 6 NPCs at various positions (random-ish)
-  townNPCs.forEach(n => n.el && n.el.remove());
-  townNPCs = [];
-  const presets = [
-    {col:6,row:2,emoji:'👩‍🍳',name:'Chef Lily'},
-    {col:10,row:5,emoji:'👨‍🌾',name:'Farmer Joe'},
-    {col:3,row:6,emoji:'🧑‍🌾',name:'Market Ida'},
-    {col:8,row:3,emoji:'🧑‍🏫',name:'Professor Kim'}
-  ];
-  presets.forEach(p=>{
-    const el = document.createElement('div'); el.className='npc'; el.textContent = p.emoji;
-    mapEl.appendChild(el);
-    el.style.left = tileToPixel(p.col, p.row).x + 'px';
-    el.style.top = tileToPixel(p.col, p.row).y + 'px';
-    el.title = p.name;
-    el.addEventListener('click', ()=> talkToNPC(p));
-    townNPCs.push({col:p.col,row:p.row,emoji:p.emoji,name:p.name,el});
-  });
-}
-
-/* convert tile coords to pixel center */
-function tileToPixel(col,row){
-  const tileSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tile-size')) || 64;
-  // consider gaps and map offset: tiles are placed in grid; we want center position of tile in mapEl
-  const rect = mapEl.getBoundingClientRect();
-  // compute left/top of tile: col * (tileSize + gap)
-  const gap = 2;
-  const x = (col * (tileSize + gap)) + (tileSize/2) + 6; // some margin inside map
-  const y = (row * (tileSize + gap)) + (tileSize/2) + 6;
-  return {x,y};
-}
-
-/* movement: WASD / arrows / click-to-move */
-let moveLock = false;
-function movePlayerTo(col,row){
-  // clamp
-  col = Math.max(0, Math.min(MAP_COLUMNS-1, col));
-  row = Math.max(0, Math.min(MAP_ROWS-1, row));
-  state.freeroam.player.col = col; state.freeroam.player.row = row;
-  placePlayer();
-  saveStateSoon();
-}
-
-/* keyboard movement */
-document.addEventListener('keydown', (e)=>{
-  if(!freeroamActive) return;
-  const key = e.key;
-  const p = state.freeroam.player;
-  if(['ArrowUp','w','W'].includes(key)){ p.row = Math.max(0, p.row-1); movePlayerTo(p.col,p.row); e.preventDefault(); }
-  if(['ArrowDown','s','S'].includes(key)){ p.row = Math.min(MAP_ROWS-1, p.row+1); movePlayerTo(p.col,p.row); e.preventDefault(); }
-  if(['ArrowLeft','a','A'].includes(key)){ p.col = Math.max(0, p.col-1); movePlayerTo(p.col,p.row); e.preventDefault(); }
-  if(['ArrowRight','d','D'].includes(key)){ p.col = Math.min(MAP_COLUMNS-1, p.col+1); movePlayerTo(p.col,p.row); e.preventDefault(); }
-  checkNPCProximity();
-});
-
-/* check if player on same tile as NPC and auto-open talk */
-function checkNPCProximity(){
-  const p = state.freeroam.player;
-  for(const npc of townNPCs){
-    if(npc.col === p.col && npc.row === p.row){
-      talkToNPC(npc);
-      break;
-    }
-  }
-}
-
-/* talk to npc: dialog and potential quest */
-function talkToNPC(npc){
-  const dialog = document.getElementById('dialog'); dialog.innerHTML = '';
-  const title = document.createElement('div'); title.style.fontWeight='800'; title.textContent = `${npc.name} ${npc.emoji}`;
-  const line = document.createElement('div'); line.style.marginTop='6px'; line.textContent = `Hi! I might have a job for you.`;
-  const actions = document.createElement('div'); actions.style.marginTop='10px'; actions.style.display='flex'; actions.style.gap='8px';
-  const askQuestBtn = document.createElement('button'); askQuestBtn.textContent = 'Ask for task';
-  const hintBtn = document.createElement('button'); hintBtn.textContent = 'Ask for hint'; hintBtn.className='ghost';
-  const closeBtn = document.createElement('button'); closeBtn.textContent = 'Close'; closeBtn.className='ghost';
-  actions.appendChild(askQuestBtn); actions.appendChild(hintBtn); actions.appendChild(closeBtn);
-  dialog.appendChild(title); dialog.appendChild(line); dialog.appendChild(actions);
-  closeBtn.addEventListener('click', ()=> dialog.classList.add('hidden'));
-  hintBtn.addEventListener('click', ()=> {
-    line.textContent = npc.name + ' says: Try planting carrots and harvesting them — Chef Lily pays well!';
-  });
-  askQuestBtn.addEventListener('click', ()=> {
-    createTownQuestFromNPC(npc);
-    dialog.classList.add('hidden');
-  });
-  dialog.classList.remove('hidden');
-}
-
-/* town quest creation: NPC asks for a crop (requires inventory to complete) */
-function createTownQuestFromNPC(npc){
-  const plants = Object.keys(PLANTS);
-  const want = plants[Math.floor(Math.random()*plants.length)];
-  const qty = 1 + Math.floor(Math.random()*2);
-  const q = { id:'q'+Date.now(), npc:npc.name, want, qty, progress:0, claimed:false, reward: 5 + Math.floor(Math.random()*6) };
-  state.quests.push(q);
-  saveStateSoon(); renderNpcQuests(); toast('New quest: '+npc.name+' wants '+qty+' '+want);
-}
-
-/* complete town quest: must have inventory */
-function tryCompleteQuest(qIndex){
-  const q = state.quests[qIndex];
-  if(!q || q.claimed) return;
-  const have = state.inventory[q.want] || 0;
-  if(have >= q.qty){
-    state.inventory[q.want] -= q.qty; q.claimed = true; state.money += q.reward;
-    toast('Quest complete! +$'+q.reward); log('Quest complete: '+q.npc+' paid $'+q.reward);
-    saveStateSoon(); renderNpcQuests(); renderGarden(); updateHUD();
-  } else {
-    toast('You do not have enough '+q.want);
-  }
-}
-
-/* show quests in sidebar with claim buttons */
-function renderNpcQuests(){
-  const el = document.getElementById('npcQuests'); el.innerHTML = '';
+  const el = document.getElementById('npcQuests'); el.innerHTML='';
   state.quests.forEach((q,i)=>{
     const row = document.createElement('div'); row.className='listItem';
     row.innerHTML = `<div><b>${q.npc}</b> wants ${q.qty} ${PLANTS[q.want].emoji} ${q.want}</div><div>${q.claimed? 'Done' : (state.inventory[q.want]||0)+'/'+q.qty}</div>`;
@@ -597,56 +499,262 @@ function renderNpcQuests(){
   });
 }
 
-/* ---------- UI switching: Garden <-> Freeroam ---------- */
+/* complete quest */
+function tryCompleteQuest(idx){
+  const q = state.quests[idx];
+  if(!q || q.claimed) return;
+  const have = state.inventory[q.want] || 0;
+  if(have >= q.qty){
+    state.inventory[q.want] -= q.qty; q.claimed = true; state.money += q.reward;
+    toast('Quest complete! +$'+q.reward); log('Quest complete: '+q.npc+' paid $'+q.reward);
+    saveSoon(); renderNpcQuests(); renderGarden(); updateInventoryUI(); updateHUD();
+  } else toast('Not enough items for quest');
+}
+
+/* progress quests automatically when harvesting */
+function progressQuestProgress(action, plantKey){
+  // change progress to match inventory counts
+  state.quests.forEach(q=>{
+    if(q.claimed) return;
+    if(q.want === plantKey){
+      q.progress = Math.min(q.qty, state.inventory[q.want] || 0);
+      if(q.progress >= q.qty) q.ready = true;
+    }
+  });
+  renderNpcQuests();
+}
+
+/* ---------- Freeroam: map, player, NPCs, shops & hidden items ---------- */
+const mapEl = document.getElementById('map');
+let freeroamActive = false;
+function buildMapTiles(){
+  mapEl.innerHTML='';
+  for(let r=0;r<MAP_ROWS;r++){
+    for(let c=0;c<MAP_COLUMNS;c++){
+      const t = document.createElement('div'); t.className='tile grass';
+      if(r===4 && c>=2 && c<=11) t.className='tile path';
+      if(r===2 && c===11) t.className='tile shop';
+      if(r===7 && c===2) t.className='tile water';
+      t.dataset.col=c; t.dataset.row=r;
+      t.addEventListener('click', ()=> movePlayerTo(c,r));
+      mapEl.appendChild(t);
+    }
+  }
+  // place hidden items randomly if not present
+  if(!state.freeroam.hiddenItems || state.freeroam.hiddenItems.length===0){
+    state.freeroam.hiddenItems = [];
+    for(let i=0;i<6;i++){
+      state.freeroam.hiddenItems.push({col: 2 + Math.floor(Math.random()*(MAP_COLUMNS-4)), row: 1 + Math.floor(Math.random()*(MAP_ROWS-2)), found:false, type: Math.random()<0.6? 'seeds':'coins'});
+    }
+  }
+  // mark hidden items visually
+  state.freeroam.hiddenItems.forEach((h,idx)=>{
+    if(h.found) return;
+    const tileIndex = h.row*MAP_COLUMNS + h.col;
+    const tile = mapEl.children[tileIndex];
+    if(tile) tile.classList.add('hiddenItem');
+  });
+}
+
+let playerEl = null;
+function placePlayer(){
+  if(!playerEl){ playerEl = document.createElement('div'); playerEl.className='player'; playerEl.textContent='🚶'; mapEl.appendChild(playerEl); }
+  const p = state.freeroam.player;
+  const pos = tileToPixel(p.col, p.row);
+  playerEl.style.left = pos.x + 'px'; playerEl.style.top = pos.y + 'px';
+}
+
+/* create town NPCs */
+let townNPCs = [];
+function populateTownNPCs(){
+  townNPCs.forEach(n=> n.el && n.el.remove());
+  townNPCs = [];
+  const presets = [
+    {col:6,row:2,emoji:'👩‍🍳',name:'Chef Lily'},
+    {col:10,row:5,emoji:'👨‍🌾',name:'Farmer Joe'},
+    {col:3,row:6,emoji:'🧑‍🌾',name:'Market Ida'}
+  ];
+  presets.forEach(p=>{
+    const el = document.createElement('div'); el.className='npc'; el.textContent = p.emoji;
+    mapEl.appendChild(el);
+    el.style.left = tileToPixel(p.col,p.row).x + 'px';
+    el.style.top = tileToPixel(p.col,p.row).y + 'px';
+    el.title = p.name;
+    el.addEventListener('click', ()=> talkToNPC(p));
+    townNPCs.push({col:p.col,row:p.row,emoji:p.emoji,name:p.name,el});
+  });
+}
+
+/* pixel position of tile center */
+function tileToPixel(col,row){
+  const tileSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tile-size')) || 64;
+  const gap = 2;
+  const x = (col * (tileSize + gap)) + (tileSize/2) + 6;
+  const y = (row * (tileSize + gap)) + (tileSize/2) + 6;
+  return {x,y};
+}
+
+/* move player via click or keyboard */
+function movePlayerTo(col,row){
+  col = Math.max(0, Math.min(MAP_COLUMNS-1, col)); row = Math.max(0, Math.min(MAP_ROWS-1, row));
+  state.freeroam.player.col = col; state.freeroam.player.row = row; placePlayer(); saveSoon(); checkFreeroamInteractions();
+}
+document.addEventListener('keydown', (e)=>{
+  if(!freeroamActive) return;
+  const p = state.freeroam.player;
+  if(['ArrowUp','w','W'].includes(e.key)){ p.row = Math.max(0,p.row-1); movePlayerTo(p.col,p.row); e.preventDefault(); }
+  if(['ArrowDown','s','S'].includes(e.key)){ p.row = Math.min(MAP_ROWS-1,p.row+1); movePlayerTo(p.col,p.row); e.preventDefault(); }
+  if(['ArrowLeft','a','A'].includes(e.key)){ p.col = Math.max(0,p.col-1); movePlayerTo(p.col,p.row); e.preventDefault(); }
+  if(['ArrowRight','d','D'].includes(e.key)){ p.col = Math.min(MAP_COLUMNS-1,p.col+1); movePlayerTo(p.col,p.row); e.preventDefault(); }
+});
+
+/* check interactions: NPCs, hidden items, shops */
+function checkFreeroamInteractions(){
+  const p = state.freeroam.player;
+  // hidden items
+  state.freeroam.hiddenItems.forEach((h,idx)=>{
+    if(h.found) return;
+    if(h.col===p.col && h.row===p.row){
+      h.found = true;
+      if(h.type === 'seeds'){ state.seeds += 2; toast('Found 2 seeds!'); log('Found seeds in town'); }
+      else { state.money += 5; toast('Found $5!'); log('Found money in town'); }
+      saveSoon(); renderGarden(); updateInventoryUI(); buildMapTiles(); placePlayer();
+    }
+  });
+  // shop tile
+  const tileIndex = p.row*MAP_COLUMNS + p.col; const tile = mapEl.children[tileIndex];
+  if(tile && tile.classList.contains('shop')) openTownShop();
+  // NPC proximity
+  townNPCs.forEach(n => { if(n.col===p.col && n.row===p.row) talkToNPC(n); });
+}
+
+/* NPC dialog and quest creation */
+function talkToNPC(npc){
+  const dialog = document.getElementById('dialog'); dialog.innerHTML='';
+  const title = document.createElement('div'); title.style.fontWeight='800'; title.textContent = `${npc.name} ${npc.emoji}`;
+  const line = document.createElement('div'); line.style.marginTop='8px'; line.textContent = `Hi! I could use some help with crops.`;
+  const actions = document.createElement('div'); actions.style.marginTop='12px'; actions.style.display='flex'; actions.style.gap='8px';
+  const askQuest = document.createElement('button'); askQuest.textContent='Ask for quest';
+  const shopBtn = document.createElement('button'); shopBtn.textContent='Open sidebar shop'; shopBtn.className='small ghost';
+  const closeBtn = document.createElement('button'); closeBtn.textContent='Close'; closeBtn.className='small ghost';
+  actions.appendChild(askQuest); actions.appendChild(shopBtn); actions.appendChild(closeBtn);
+  dialog.appendChild(title); dialog.appendChild(line); dialog.appendChild(actions);
+  askQuest.addEventListener('click', ()=> { createTownQuestFromNPC(npc); dialog.classList.add('hidden'); });
+  shopBtn.addEventListener('click', ()=> { dialog.classList.add('hidden'); document.getElementById('shopList').scrollIntoView({behavior:'smooth'}); });
+  closeBtn.addEventListener('click', ()=> dialog.classList.add('hidden'));
+  dialog.classList.remove('hidden');
+}
+
+/* quest creation (NPC asks for multiple items) */
+function createTownQuestFromNPC(npc){
+  const plants = Object.keys(PLANTS); const want = plants[Math.floor(Math.random()*plants.length)]; const qty = 1 + Math.floor(Math.random()*2);
+  const q = { id:'q'+Date.now(), npc:npc.name, want, qty, claimed:false, reward: 5 + Math.floor(Math.random()*8) };
+  state.quests.push(q); saveSoon(); renderNpcQuests(); toast('New quest: '+npc.name+' wants '+qty+' '+want);
+}
+
+/* shop inside town: walk into shop tile to open (opens sidebar shop UI focus) */
+function openTownShop(){
+  toast('You entered the shop area. Use sidebar shop to buy items.');
+}
+
+/* ---------- Mode switching ---------- */
 const gardenArea = document.getElementById('gardenArea');
 const freeroamArea = document.getElementById('freeroamArea');
 
-document.getElementById('btnFreeroam').addEventListener('click', ()=>{
-  enterFreeroam();
-});
-document.getElementById('btnGarden').addEventListener('click', ()=>{
-  exitFreeroam();
-});
+document.getElementById('btnFreeroam').addEventListener('click', ()=> enterFreeroam());
+document.getElementById('btnGarden').addEventListener('click', ()=> exitFreeroam());
 document.getElementById('btnOpenTown').addEventListener('click', ()=> enterFreeroam());
 document.getElementById('btnReturnGarden').addEventListener('click', ()=> exitFreeroam());
-
 function enterFreeroam(){
-  gardenArea.style.display = 'none';
-  freeroamArea.style.display = 'flex';
-  freeroamActive = true;
-  document.getElementById('btnFreeroam').classList.remove('ghost');
-  document.getElementById('btnGarden').classList.add('ghost');
+  gardenArea.style.display='none'; freeroamArea.style.display='flex'; freeroamActive=true; document.getElementById('btnFreeroam').classList.remove('ghost'); document.getElementById('btnGarden').classList.add('ghost');
   buildMapTiles(); populateTownNPCs(); placePlayer();
 }
 function exitFreeroam(){
-  freeroamActive = false;
-  freeroamArea.style.display = 'none';
-  gardenArea.style.display = 'block';
-  document.getElementById('btnGarden').classList.remove('ghost');
-  document.getElementById('btnFreeroam').classList.add('ghost');
-  saveStateSoon();
+  freeroamActive=false; freeroamArea.style.display='none'; gardenArea.style.display='block'; document.getElementById('btnGarden').classList.remove('ghost'); document.getElementById('btnFreeroam').classList.add('ghost'); saveSoon();
 }
 
-/* ---------- Utility: find first ripe to harvest (Harvest All) ---------- */
+/* ---------- Water can quick buy & per-plot water button ---------- */
+document.getElementById('btnBuyWater').addEventListener('click', ()=> {
+  if(state.money >= 8){ state.money -= 8; state.waterCharges = (state.waterCharges||0) + 3; toast('Bought water can (+3)'); saveSoon(); updateInventoryUI(); updateHUD(); } else toast('Not enough money');
+});
+document.getElementById('btnUseWater').addEventListener('click', ()=> {
+  if(state.waterCharges && state.waterCharges > 0){ state.waterCharges--; // water all planted plots once
+    state.plots.forEach((p,i)=>{ if(p.planted && !p.weed && !p.pest) p.water = (p.water||0) + 1; });
+    toast('Water used on planted plots'); saveSoon(); renderGarden(); updateInventoryUI();
+  } else toast('No water charges');
+});
+document.getElementById('btnUseFert').addEventListener('click', ()=> {
+  if(state.fertCount && state.fertCount>0){
+    // fertilize all planted plots
+    state.fertCount--; state.plots.forEach(p=>{ if(p.planted && !p.weed && !p.pest) p.growth = Math.min(p.growth+1, PLANTS[p.plantKey]?.growthStages || p.growth+1); });
+    toast('Fertilizer applied to planted plots'); saveSoon(); renderGarden(); updateInventoryUI();
+  } else toast('No fertilizer');
+});
+document.getElementById('btnScarecrow').addEventListener('click', ()=> {
+  if(state.hasScarecrow){ toast('You already have a scarecrow'); return; }
+  if(state.money >= 40){ state.money -= 40; state.hasScarecrow = true; toast('Scarecrow placed — pest chance reduced'); saveSoon(); renderGarden(); updateHUD(); } else toast('Not enough money');
+});
+document.getElementById('btnUpgradeSoil').addEventListener('click', ()=> {
+  // upgrade first non-rich plot for demo
+  const idx = state.plots.findIndex(p=>p.soilQuality!=='rich');
+  if(idx<0){ toast('All plots are rich'); return; }
+  if(state.money >= 6){ state.money -= 6; state.plots[idx].soilQuality = 'rich'; toast('Upgraded soil on a plot'); saveSoon(); renderGarden(); } else toast('Not enough money');
+});
+
+/* Harvest all ready plots */
 document.getElementById('btnHarvestAll').addEventListener('click', ()=>{
-  let count=0;
+  let count = 0;
   state.plots.forEach(p=>{
     if(p.planted && p.growth >= PLANTS[p.plantKey].growthStages && !p.pest){
       state.inventory[p.plantKey] = (state.inventory[p.plantKey]||0) + 1;
-      state.money += PLANTS[p.plantKey].reward;
-      p.planted=false; p.plantKey=null; p.growth=0; count++;
+      let base = PLANTS[p.plantKey].reward;
+      if(p.soilQuality === 'rich') base = Math.round(base * 1.2);
+      if(p.soilQuality === 'poor') base = Math.max(1, Math.round(base * 0.8));
+      state.money += base; count++;
+      p.planted=false; p.plantKey=null; p.growth=0; p.water=0; p.pest=false; p.weed=false;
     }
   });
-  if(count>0){ toast('Harvested '+count+' crops'); log('Harvested all: '+count); saveStateSoon(); renderGarden(); updateInventoryUI(); updateHUD(); } else toast('No ready crops');
+  if(count>0){ toast('Harvested '+count+' crops'); saveSoon(); renderGarden(); updateInventoryUI(); updateHUD(); } else toast('No ready crops');
 });
 
-/* ---------- Save button, reset ---------- */
-document.getElementById('saveBtn').addEventListener('click', ()=> saveState());
-document.getElementById('resetBtn').addEventListener('click', ()=> {
-  if(confirm('Reset everything?')){ localStorage.removeItem(STORAGE_KEY); state = JSON.parse(JSON.stringify(DEFAULT_STATE)); ensurePlots(); buildPlantSelector(); renderGarden(); renderShop(); renderNpcQuests(); toast('Reset'); }
-});
+/* ---------- NPC Quests rendering ---------- */
+function renderNpcQuests(){
+  const el = document.getElementById('npcQuests'); el.innerHTML='';
+  state.quests.forEach((q, i)=>{
+    const row = document.createElement('div'); row.className='listItem';
+    row.innerHTML = `<div>${q.npc} wants ${q.qty} ${PLANTS[q.want].emoji} ${q.want}</div><div>${q.claimed? 'Done' : (state.inventory[q.want]||0)+'/'+q.qty}</div>`;
+    if(!q.claimed){ const btn=document.createElement('button'); btn.className='small'; btn.textContent='Give'; btn.addEventListener('click', ()=> tryCompleteQuest(i)); row.appendChild(btn); }
+    el.appendChild(row);
+  });
+}
 
-/* ---------- init ---------- */
+/* try complete */
+function tryCompleteQuest(i){
+  const q = state.quests[i]; if(!q || q.claimed) return;
+  const have = state.inventory[q.want] || 0;
+  if(have >= q.qty){ state.inventory[q.want] -= q.qty; q.claimed = true; state.money += q.reward; toast('Quest complete! +$'+q.reward); log('Quest complete: '+q.npc); saveSoon(); renderNpcQuests(); renderGarden(); updateInventoryUI(); updateHUD(); } else toast('Not enough items');
+}
+
+/* ---------- inventory & HUD ---------- */
+function updateInventoryUI(){
+  const inv = document.getElementById('inventory'); inv.innerHTML='';
+  for(const k in PLANTS){ const cnt = state.inventory[k] || 0; const box=document.createElement('div'); box.className='invItem'; box.textContent = `${PLANTS[k].emoji} ${k}: ${cnt}`; inv.appendChild(box); }
+  const w = document.createElement('div'); w.className='invItem'; w.textContent = `WaterCharges: ${state.waterCharges||0}`; inv.appendChild(w);
+  const f = document.createElement('div'); f.className='invItem'; f.textContent = `Fertilizers: ${state.fertCount||0}`; inv.appendChild(f);
+}
+function updateHUD(){ document.getElementById('money').textContent = Math.floor(state.money||0); document.getElementById('seeds').textContent = state.seeds||0; document.getElementById('pots').textContent = state.pots||0; document.getElementById('waterCharges').textContent = state.waterCharges||0; document.getElementById('fertCount').textContent = state.fertCount||0; }
+
+/* ---------- Save scheduling ---------- */
+let saveTimer = null;
+function saveSoon(){ if(saveTimer) return; saveTimer = setTimeout(()=>{ saveState(); saveTimer=null; }, 900); }
+
+/* ---------- Freeroam hidden item collection periodic event ---------- */
+function randomTownEvents(){
+  if(Math.random() < 0.06) toast('Town: a market crowd gathers (small chance events)');
+}
+setInterval(randomTownEvents, 15000);
+
+/* ---------- Init ---------- */
 function init(){
   ensurePlots();
   buildPlantSelector();
@@ -655,38 +763,45 @@ function init(){
   renderNpcQuests();
   updateInventoryUI();
   updateHUD();
-  // default mode = garden
-  exitFreeroam();
-  log('Game ready. Use Garden or Freeroam. In town, talk to NPCs and give harvested crops to complete quests.');
+  exitFreeroam(); // default to garden
+  log('Gardening 2.0 loaded. Use Water and Fertilizer, handle pests/weeds, upgrade soil & tools.');
 }
+function renderShop(){ const s=document.getElementById('shopList'); s.innerHTML=''; SHOP.forEach(it=>{ const r=document.createElement('div'); r.className='listItem'; r.innerHTML=`<div>${it.name}</div><div style="display:flex;gap:8px;align-items:center"><div>$${it.cost}</div><button data-id="${it.id}" class="small">Buy</button></div>`; s.appendChild(r); }); s.querySelectorAll('button[data-id]').forEach(b=>{ b.addEventListener('click', ()=>{ const id=b.dataset.id; const it=SHOP.find(x=>x.id===id); if(!it) return; if(state.money >= it.cost){ state.money -= it.cost; it.action(state); toast('Bought '+it.name); log('Bought '+it.name); saveSoon(); renderGarden(); renderShop(); updateInventoryUI(); updateHUD(); } else toast('Not enough money'); }); }); }
 init();
 
-/* ---------- small helpers and progress for town quests triggered by actions ---------- */
-function progressQuestProgress(action, plantKey){
-  // called on plant/harvest/water/pest removal; for now we only use it to auto increment progress for plant/harvest matching
-  state.quests.forEach(q=>{
-    if(q.claimed) return;
-    if(q.want === plantKey){
-      if(action === 'harvest') q.progress = Math.min(q.qty, (state.inventory[q.want]||0));
-      if(q.progress >= q.qty) q.ready = true;
+/* ---------- Map & freeroam init helpers ---------- */
+function buildMapTiles(){ mapEl.innerHTML=''; for(let r=0;r<MAP_ROWS;r++){ for(let c=0;c<MAP_COLUMNS;c++){ const t = document.createElement('div'); t.className='tile grass'; if(r===4 && c>=2 && c<=11) t.className='tile path'; if(r===2 && c===11) t.className='tile shop'; if(r===7 && c===2) t.className='tile water'; t.dataset.col=c; t.dataset.row=r; t.addEventListener('click', ()=> movePlayerTo(c,r)); mapEl.appendChild(t); } } // hidden items
+  state.freeroam.hiddenItems = state.freeroam.hiddenItems || [];
+  if(state.freeroam.hiddenItems.length === 0){
+    for(let i=0;i<6;i++){
+      state.freeroam.hiddenItems.push({col: 2 + Math.floor(Math.random()*(MAP_COLUMNS-4)), row: 1 + Math.floor(Math.random()*(MAP_ROWS-2)), found:false, type: Math.random()<0.6? 'seeds':'coins'});
     }
-  });
-  renderNpcQuests();
-}
-
-/* ---------- small random pest spawner for freeroam (demo flair) ---------- */
-function randomTownEvents(){
-  if(Math.random() < 0.08 && Math.random() < 0.5){
-    toast('Town event: market sale today!');
   }
+  state.freeroam.hiddenItems.forEach(h=>{ if(!h.found){ const tileIndex = h.row*MAP_COLUMNS + h.col; const tile = mapEl.children[tileIndex]; if(tile) tile.classList.add('hiddenItem'); } });
 }
-setInterval(randomTownEvents, 15000);
+function populateTownNPCs(){ townNPCs.forEach(n=> n.el && n.el.remove()); townNPCs = []; const presets=[ {col:6,row:2,emoji:'👩‍🍳',name:'Chef Lily'}, {col:10,row:5,emoji:'👨‍🌾',name:'Farmer Joe'}, {col:3,row:6,emoji:'🧑‍🌾',name:'Market Ida'} ]; presets.forEach(p=>{ const el=document.createElement('div'); el.className='npc'; el.textContent = p.emoji; mapEl.appendChild(el); el.style.left = tileToPixel(p.col,p.row).x+'px'; el.style.top = tileToPixel(p.col,p.row).y+'px'; el.title = p.name; el.addEventListener('click', ()=> talkToNPC(p)); townNPCs.push({col:p.col,row:p.row,emoji:p.emoji,name:p.name,el}); }); }
+function tileToPixel(col,row){ const tileSize = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--tile-size')) || 64; const gap = 2; const x = (col * (tileSize + gap)) + (tileSize/2) + 6; const y = (row * (tileSize + gap)) + (tileSize/2) + 6; return {x,y}; }
+function placePlayer(){ if(!playerEl){ playerEl = document.createElement('div'); playerEl.className='player'; playerEl.textContent='🚶'; mapEl.appendChild(playerEl); } const p = state.freeroam.player; const pos = tileToPixel(p.col,p.row); playerEl.style.left = pos.x+'px'; playerEl.style.top = pos.y+'px'; }
 
-/* ---------- final small utilities ---------- */
-function saveStateSoon(){ if(saveTimer) return; saveTimer = setTimeout(()=>{ try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); toast('Saved'); }catch(e){}; saveTimer=null; }, 900); }
+/* ---------- Events ---------- */
+document.getElementById('btnFreeroam').addEventListener('click', ()=> enterFreeroam());
+document.getElementById('btnGarden').addEventListener('click', ()=> exitFreeroam());
+document.getElementById('btnOpenTown').addEventListener('click', ()=> enterFreeroam());
+document.getElementById('btnReturnGarden').addEventListener('click', ()=> exitFreeroam());
 
-/* expose for debugging */
-window.__TINY = { state };
+function enterFreeroam(){ document.getElementById('gardenArea').style.display='none'; document.getElementById('freeroamArea').style.display='flex'; freeroamActive=true; document.getElementById('btnFreeroam').classList.remove('ghost'); document.getElementById('btnGarden').classList.add('ghost'); buildMapTiles(); populateTownNPCs(); placePlayer(); }
+function exitFreeroam(){ freeroamActive=false; document.getElementById('freeroamArea').style.display='none'; document.getElementById('gardenArea').style.display='block'; document.getElementById('btnGarden').classList.remove('ghost'); document.getElementById('btnFreeroam').classList.add('ghost'); saveSoon(); }
+
+/* keyboard movement in freeroam handled above; check interactions after moving */
+function checkFreeroamInteractions(){ const p = state.freeroam.player; // hidden items
+  state.freeroam.hiddenItems.forEach(h=>{ if(!h.found && h.col===p.col && h.row===p.row){ h.found=true; if(h.type==='seeds'){ state.seeds += 2; toast('Found 2 seeds!'); log('Found seeds in town'); } else { state.money += 5; toast('Found $5!'); log('Found money in town'); } saveSoon(); renderGarden(); updateInventoryUI(); buildMapTiles(); placePlayer(); } }); // shop tile
+  const tileIndex = p.row*MAP_COLUMNS + p.col; const tile = mapEl.children[tileIndex]; if(tile && tile.classList.contains('shop')) openTownShop(); townNPCs.forEach(n=>{ if(n.col===p.col && n.row===p.row) talkToNPC(n); }); }
+
+/* open town shop (sidebar) */
+function openTownShop(){ toast('Entered Shop zone — use sidebar shop to buy.'); }
+
+/* ---------- Save on unload ---------- */
+window.addEventListener('beforeunload', ()=> saveState());
 
 </script>
 </body>
